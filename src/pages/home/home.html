@@ -1,14 +1,80 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Sign Up
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <!--
   The world is your oyster.
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v3">docs</a> will be your guide.
-  </p>
+  </p>-->
+
+  <ion-list [formGroup]="formgroup" *ngIf="signupstatus==false">
+
+    <ion-item>
+      <ion-label floating>User Name</ion-label>
+      <ion-input type='text' formControlName="username" [(ngModel)]="user"></ion-input>
+    </ion-item>
+
+    <div *ngIf="username.hasError('required') && username.touched" class="validator-error">This field is required</div>
+    <div *ngIf="!formgroup.controls.username.valid && formgroup.controls.username.dirty" class="validator-error">Username must contain only alphabets</div>
+  
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type='email' formControlName="email" [(ngModel)]="mail"></ion-input>
+    </ion-item>
+
+    <div *ngIf="email.hasError('required') && email.touched" class="validator-error">This field is required</div>
+    <div *ngIf="!formgroup.controls.email.valid && formgroup.controls.email.dirty" class="validator-error">Enter a valid email</div>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type='password' formControlName="password" [(ngModel)]="pass"></ion-input>
+    </ion-item>
+
+    <div *ngIf="password.hasError('required') && password.touched" class="validator-error">This field is required</div>
+    <div *ngIf="!formgroup.controls.password.valid && formgroup.controls.password.dirty" class="validator-error">Password must contain min. of 8 characters, 1 number, 1 alphabet and 1 special character</div>
+
+    <ion-item>
+      <ion-label floating>Mobile Number</ion-label>
+      <ion-input type='number' formControlName="number" [(ngModel)]="num"></ion-input>
+    </ion-item>
+
+    <div *ngIf="number.hasError('required') && number.touched" class="validator-error">This field is required</div>
+    <div *ngIf="!formgroup.controls.number.valid && formgroup.controls.number.dirty" class="validator-error">Mobile number must contain only numbers</div>
+
+  
+  </ion-list>
+<!--
+  <ion-list [formGroup]=formgroup *ngIf="signupstatus==true&&loginstatus==false">
+
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input type='email' formControlName="email" ></ion-input>
+    </ion-item>
+
+    <div *ngIf="email.hasError('required') && email.touched" class="validator-error">This field is required</div>
+    <div *ngIf="!formgroup.controls.email.valid && formgroup.controls.email.dirty" class="validator-error">Enter a valid email</div>
+
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type='password' formControlName="password" ></ion-input>
+    </ion-item>
+
+    <div *ngIf="password.hasError('required') && password.touched" class="validator-error">This field is required</div>
+    <div *ngIf="!formgroup.controls.password.valid && formgroup.controls.password.dirty" class="validator-error">Password must contain min. of 8 characters, 1 number, 1 alphabet and 1 special character</div>
+
+  </ion-list>
+
+  <div *ngIf="signupstatus==true ">Welcome</div>-->
+
+  <p *ngIf="signupstatus==false">Already a user? <button style="color: blue;" (click)="move()"> Login </button></p>
+
+  <button ion-button *ngIf="signupstatus==false  && formgroup.controls.email.valid && formgroup.controls.email.dirty && formgroup.controls.number.valid && formgroup.controls.number.dirty && formgroup.controls.username.valid && formgroup.controls.username.dirty && formgroup.controls.password.valid && formgroup.controls.password.dirty" (click)="signup()"  >Sign Up</button>
+
+  <!--<button ion-button *ngIf="signupstatus==true " (click)="logout()">LOG OUT</button>-->
 </ion-content>
