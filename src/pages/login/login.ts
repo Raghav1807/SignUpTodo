@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -54,7 +55,9 @@ export class LoginPage {
   }
 
   signout(){
-    this.navCtrl.pop();
+    //this.navCtrl.pop();
+    this.navCtrl.setRoot(HomePage);
+    this.navCtrl.popToRoot();
   }
 
 }

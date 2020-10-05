@@ -70,7 +70,9 @@ export class HomePage {
     //this.email=null;
     //this.password=null;
     //this.number=null;
-    this.navCtrl.push(LoginPage);
+    //this.navCtrl.push(LoginPage);
+    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.popToRoot();
   }
 
   //logout()
@@ -84,7 +86,9 @@ export class HomePage {
 
   move(){
     this.storage.set('key1',this.loginstatus);
-    this.navCtrl.push(LoginPage);
+    //this.navCtrl.push(LoginPage);
+    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.popToRoot();
   }
 
   ionViewWillEnter()
