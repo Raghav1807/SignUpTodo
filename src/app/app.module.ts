@@ -7,6 +7,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login'
+import { TaskPage } from '../pages/task/task'
+import { NewtaskPage } from '../pages/newtask/newtask'
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 import {IonicStorageModule} from '@ionic/storage';
 
@@ -14,7 +17,9 @@ import {IonicStorageModule} from '@ionic/storage';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    TaskPage,
+    NewtaskPage
   ],
   imports: [
     BrowserModule,
@@ -25,11 +30,14 @@ import {IonicStorageModule} from '@ionic/storage';
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    TaskPage,
+    NewtaskPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

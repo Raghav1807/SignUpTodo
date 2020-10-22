@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms'
 import {Storage} from '@ionic/storage';
 import { LoginPage } from '../login/login'
+import { TaskPage } from '../task/task'
+import { NewtaskPage } from '../newtask/newtask'
 
 @Component({
   selector: 'page-home',
@@ -71,7 +73,7 @@ export class HomePage {
     //this.password=null;
     //this.number=null;
     //this.navCtrl.push(LoginPage);
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.setRoot(TaskPage);
     this.navCtrl.popToRoot();
   }
 
