@@ -10,6 +10,7 @@ import { LoginPage } from '../pages/login/login'
 import { TaskPage } from '../pages/task/task'
 import { NewtaskPage } from '../pages/newtask/newtask'
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { HttpClientModule } from '@angular/common/http';
 
 import {IonicStorageModule} from '@ionic/storage';
 
@@ -23,6 +24,7 @@ import {IonicStorageModule} from '@ionic/storage';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

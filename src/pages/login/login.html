@@ -12,7 +12,7 @@
 
 <ion-content padding>
 
-  <ion-list *ngIf="loginstatus==false">
+  <ion-list>
   <ion-item>
     <ion-label floating>Email</ion-label>
     <ion-input type='email' [(ngModel)]="email" ></ion-input>
@@ -27,11 +27,11 @@
 
   </ion-list>
 
-  <ion-list *ngIf="loginstatus==true">
+  <!--<ion-list *ngIf="loginstatus==true">
     <p>Logged In Successfully</p>
-  </ion-list>
+  </ion-list>-->
 
-  <button ion-button *ngIf="loginstatus==false" (click)="login()"></button>
+  <button ion-button (click)="login()">LOG IN</button>
 
   <!--<button ion-button (click)="signout()">LOG OUT</button>-->
 

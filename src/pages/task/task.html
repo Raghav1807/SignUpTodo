@@ -16,9 +16,9 @@
   <ion-list *ngFor="let todo of task; let i=index" >
  
   <ion-card *ngIf="task.length!=0">
-    <div style="width: 50px; height: 50px; float: left;"><img src="{{todo.photo}}" alt=""></div>
+    <!-- <div style="width: 50px; height: 50px; float: left;"><img src="{{todo.image}}" alt=""></div> -->
     <ion-card-header style="font-weight: bold;">
-      {{todo.title}}
+      {{todo.task}}
     </ion-card-header>
 
     <ion-card-content>

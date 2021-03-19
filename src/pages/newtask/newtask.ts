@@ -5,6 +5,7 @@ import { LoginPage } from '../login/login'
 import { TaskPage } from '../task/task'
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {Storage} from '@ionic/storage';
+import {HttpClient} from '@angular/common/http'
 
 /**
  * Generated class for the NewtaskPage page.
@@ -20,11 +21,12 @@ import {Storage} from '@ionic/storage';
 })
 export class NewtaskPage {
 
-  title:any;
+  task:any;
   description:any;
-  photo:any;
+  image:any;
+  blob:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public storage:Storage, private camera: Camera) {
+  constructor(public http:HttpClient, public navCtrl: NavController, public navParams: NavParams, public storage:Storage, private camera: Camera) {
   }
 
   ionViewDidLoad() {
@@ -33,36 +35,48 @@ export class NewtaskPage {
 
   saveTask() {
 
-    let data = {
-      title:this.title,
-      description:this.description,
-      photo:this.photo
-    }
+    this.storage.get('userdetails').then((user)=>{
+      let data = {
+        task:this.task,
+        description:this.description,
+        //image:this.blob,
+        email:user.email
+      }
+      console.log(data)
+      this.http.post('http://localhost:3000/addtask',data).subscribe(response=>{
+        this.navCtrl.setRoot(TaskPage);
+        this.navCtrl.popToRoot();
+      })
+    })
 
-    this.storage.set('key',data);
+    
+
+    //this.storage.set('key',data);
     //this.storage.set('n',1);
 
-    this.navCtrl.pop();
+    //this.navCtrl.pop();
 
   }
 
-  takephoto()
-  {
-    const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
+  // takephoto()
+  // {
+  //   const options: CameraOptions = {
+  //     quality: 350,
+  //     destinationType: this.camera.DestinationType.DATA_URL,
+  //     encodingType: this.camera.EncodingType.JPEG,
+  //     mediaType: this.camera.MediaType.PICTURE
+  //   }
     
     
-    this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     this.photo = 'data:image/jpeg;base64,' + imageData;
-    }, (err) => {
-     // Handle error
-    });
-  }
+  //   this.camera.getPicture(options).then((imageData) => {
+  //    // imageData is either a base64 encoded string or a file URI
+  //    // If it's base64 (DATA_URL):
+  //    this.image = 'data:image/jpeg;base64,${imageData}';
+  //    const base64 = fetch(this.image)
+  //    this.blob = base64.blob()
+  //   }, (err) => {
+  //    // Handle error
+  //   });
+  // }
 
 }

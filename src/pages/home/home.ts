@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms'
+import { HttpClient } from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 import { LoginPage } from '../login/login'
 import { TaskPage } from '../task/task'
@@ -25,7 +26,7 @@ export class HomePage {
   //pass:any;
   //num:any;
 
-  constructor(public navCtrl: NavController, public formbuilder:FormBuilder, public storage:Storage) {
+  constructor(public http: HttpClient, public navCtrl: NavController, public formbuilder:FormBuilder, public storage:Storage) {
     this.formgroup=this.formbuilder.group({
       username:['',[Validators.required,Validators.pattern(/^[a-zA-Z]*$/)]],
       email:['',[Validators.required,Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)]],
@@ -37,6 +38,17 @@ export class HomePage {
     this.email = this.formgroup.controls['email'];
     this.password = this.formgroup.controls['password'];
     this.number = this.formgroup.controls['number'];
+  }
+
+  ionViewDidLoad() {
+    this.storage.get('key1').then((val)=>{
+      this.loginstatus=val
+      if(this.loginstatus==true)
+      {
+        this.navCtrl.setRoot(TaskPage);
+        this.navCtrl.popToRoot();
+      }
+    })
   }
 
   signup()
@@ -56,18 +68,21 @@ export class HomePage {
     //this.storage.set('email', this.email.value);
     //this.storage.set('password', this.password.value);
     //this.storage.set('number', this.number.value);
-    this.storage.get('sign').then((val)=>{
-      if(val==null)
-      {
-        let arr=[details];
-        this.storage.set('sign',arr);
-      }
-      else {
-        this.signin=val;
-        this.signin.push(details);
-        this.storage.set('sign',this.signin);
-      }
-    });
+    // this.storage.get('sign').then((val)=>{
+    //   if(val==null)
+    //   {
+    //     let arr=[details];
+    //     this.storage.set('sign',arr);
+    //   }
+    //   else {
+    //     this.signin=val;
+    //     this.signin.push(details);
+    //     this.storage.set('sign',this.signin);
+    //   }
+    // });
+    this.http.post('http://localhost:3000/signup',details).subscribe(response=>{
+
+    })
     //this.username=null;
     //this.email=null;
     //this.password=null;
@@ -96,6 +111,7 @@ export class HomePage {
   ionViewWillEnter()
   {
     this.signupstatus=false;
+    
   }
 
 }
