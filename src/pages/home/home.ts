@@ -41,7 +41,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.storage.get('key1').then((val)=>{
+    this.storage.get('key1').then((val) => {
       this.loginstatus=val
       if(this.loginstatus==true)
       {
